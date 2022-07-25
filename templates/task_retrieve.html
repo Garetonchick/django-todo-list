@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> {{ task.title }}</h1>
+<p><b>Description:</b> <i>{{ task.description }}</i></p>
+<p><b>Deadline:</b> {{ task.deadline }}</p>
+<p><b>Type:</b> {{ task.task_type }}</p><br>
+<div><a href="update">Edit</a></div>
+<div><a href="delete">Delete</a></div><br>
+<div><a href="/">Back to main page</a></div>
+
+{% endblock %}
