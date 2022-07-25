@@ -4,8 +4,8 @@
 
 <h1> Tasks </h1>
 {% for task in tasks %}
-<div><a href="task/{{task.id}}"> {{ task }} </a></div><br>
+<div><a href="{% url 'tasks:detail' task.id %}"> {{ task }} </a></div><br>
 {% endfor %}<br>
-<div><a href="/task-create/"> Add New Task </a></div> 
+<div><a href="{% url 'tasks:create' %}"> Add New Task </a></div> 
 
 {% endblock %}

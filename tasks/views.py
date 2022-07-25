@@ -1,5 +1,6 @@
 from urllib import request
 from django.shortcuts import redirect, render
+from django.shortcuts import reverse
 
 from .models import Task
 from .forms import TaskForm
@@ -24,7 +25,7 @@ def task_create(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return redirect(reverse('tasks:index'))
 
     context = {
         "form": form
@@ -51,4 +52,4 @@ def task_delete(request, id):
     task = Task.objects.get(id=id)
     task.delete()
 
-    return redirect("/") 
+    return redirect(reverse('tasks:index'))
