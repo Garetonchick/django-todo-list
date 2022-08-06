@@ -3,9 +3,11 @@
 {% block content %}
 
 <h1> Tasks </h1>
+<ul>
 {% for task in tasks %}
-<div><a href="{% url 'tasks:task-detail' task.id %}"> {{ task }} </a></div><br>
-{% endfor %}<br>
-<div><a href="{% url 'tasks:task-create' %}"> Add New Task </a></div> 
+<li><a href="{% url 'tasks:task-detail' task.id %}"> {{ task }} </a></li>
+{% endfor %}
+</ul>
+<a href="{% url 'tasks:task-create' %}"> Add New Task </a>
 
 {% endblock %}
