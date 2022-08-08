@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from tasks.views import LandingPageView
+from tasks.views import LandingPageView, SignUpView, EmailConfirmedView
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -24,4 +24,6 @@ urlpatterns = [
     path('tasks/', include('tasks.urls')),
     path('login/', LoginView.as_view(), name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
+    path('signup/', SignUpView.as_view(), name="signup"),
+    path('confirm-email/<uidb64>/<token>/', EmailConfirmedView.as_view(), name="confirm-email"),
 ]
