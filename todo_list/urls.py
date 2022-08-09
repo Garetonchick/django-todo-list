@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from tasks.views import LandingPageView, SignUpView, EmailConfirmedView
-from django.contrib.auth.views import LoginView, LogoutView
+from tasks.views import LandingPageView, SignUpView, EmailConfirmedView, LoginView
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', LandingPageView.as_view(), name="landing-page"),

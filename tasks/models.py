@@ -18,6 +18,7 @@ class Task(models.Model):
     description = models.CharField(max_length=200)
     deadline = models.DateTimeField()
     task_type = models.CharField(max_length=66)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

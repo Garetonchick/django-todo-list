@@ -3,6 +3,7 @@ from django.shortcuts import reverse, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth import mixins as auth_mixins
+from django.contrib.auth import views as auth_views
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
@@ -14,6 +15,19 @@ from .tokens import account_activation_token_generator
 
 class LandingPageView(generic.TemplateView):
     template_name = "landing_page.html"
+
+
+class LoginView(auth_views.LoginView):
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+
+        if form.is_valid():
+            user = form.get_user() 
+
+            if user.email_confirmed:
+                return self.form_valid(form)
+
+        return self.form_invalid(form)
 
 class SignUpView(generic.CreateView):
     template_name = "registration/signup.html"
@@ -44,27 +58,27 @@ class EmailConfirmedView(generic.View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None 
 
-        print(f"Username of confirmed user is: {user.username}")
-
         if user is not None and account_activation_token_generator.check_token(user, token): 
             user.email_confirmed = True
             user.save()
-            messages.success(request, "Your account has been confirmed")
             return redirect(reverse('login'))
         else:
-            messages.warning(request, "The confirmation link was invalid, possibly because it has already been used.")  
             return redirect(reverse('landing-page'))
          
 
 class TaskListView(auth_mixins.LoginRequiredMixin, generic.ListView): 
     template_name = "tasks/task_list.html"
-    queryset = Task.objects.all()
     context_object_name = "tasks"
+
+    def get_queryset(self): 
+        return Task.objects.filter(user=self.request.user) 
 
 class TaskDetailView(auth_mixins.LoginRequiredMixin, generic.DetailView):
     template_name = "tasks/task_detail.html"
-    queryset = Task.objects.all()
     context_object_name = "task"
+
+    def get_queryset(self): 
+        return Task.objects.filter(user=self.request.user) 
 
 class TaskCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView):
     template_name = "tasks/task_create.html"
@@ -72,6 +86,12 @@ class TaskCreateView(auth_mixins.LoginRequiredMixin, generic.CreateView):
 
     def get_success_url(self):
         return reverse('tasks:task-detail', args = [ self.object.pk ]) 
+
+    def form_valid(self, form):
+        task = form.save(commit=False)
+        task.user = self.request.user
+        task.save()
+        return super().form_valid(form)
 
 class TaskUpdateView(auth_mixins.LoginRequiredMixin, generic.UpdateView):
     template_name = "tasks/task_update.html"
@@ -83,7 +103,9 @@ class TaskUpdateView(auth_mixins.LoginRequiredMixin, generic.UpdateView):
 
 class TaskDeleteView(auth_mixins.LoginRequiredMixin, generic.DeleteView):
     template_name = "tasks/task_delete.html"
-    queryset = Task.objects.all()
+
+    def get_queryset(self): 
+        return Task.objects.filter(user=self.request.user) 
 
     def get_success_url(self):
         return reverse('tasks:task-list') 
