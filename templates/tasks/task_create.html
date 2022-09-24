@@ -1,12 +1,37 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block meta %}
+
+<link rel="stylesheet" href="{% static 'tasks/task_create.css' %}">
+
+{% endblock %}
 
 {% block content %}
 
-<h1>Create Task</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create</button>
-</form>
+<div class="center-horizontally">
+    <h1>Create Task</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            {% if field.id_for_label == "id_description" %}
+            <div class="description-item">
+                {{ field.errors }}
+                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                <div class="description-field">{{ field }}</div>
+            </div>
+            {% else %}
+            <div class="form-item">
+                {{ field.errors }}
+                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                <div class="form-field">{{ field }}</div>
+            </div>
+            {% endif %}
+        {% endfor %}
+
+        <button class="button" type="submit">Create</button>
+    </form>
+</div>
 
 {% endblock %}

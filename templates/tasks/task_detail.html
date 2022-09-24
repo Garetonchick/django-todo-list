@@ -11,12 +11,13 @@
 
 <div class="center-horizontally">
     <h1> {{ task.title }}</h1>
-    <p><b>Description:</b> <i>{{ task.description }}</i></p>
+    <h2> Description </h2>
+    <p class="text-box"><i>{{ task.description }}</i></p>
     <p><b>Deadline:</b> {{ task.deadline }}</p>
     <p><b>Type:</b> {{ task.task_type }}</p><br>
-    <div><a href="{% url 'tasks:task-update' task.id %}">Edit</a></div>
-    <div><a href="{% url 'tasks:task-delete' task.id %}">Delete</a></div><br>
-    <div><a href="{% url 'tasks:task-list' %}">Back to main page</a></div>
+    <div><a class="button" href="{% url 'tasks:task-update' task.id %}">Edit</a></div>
+    <div><a class="button" href="{% url 'tasks:task-delete' task.id %}">Delete</a></div><br>
+    <div><a class="button" href="{% url 'tasks:task-list' %}">Back to main page</a></div>
 </div>
 
 {% endblock %}

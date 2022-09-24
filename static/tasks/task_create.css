@@ -1,0 +1,19 @@
+.form-item {
+    display: flex;
+    align-items: center;
+}
+
+.form-field {
+    box-sizing: border-box;
+    display: block;
+    transform: translateY(-2px);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    margin-top: 22px;
+}

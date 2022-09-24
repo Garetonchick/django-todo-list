@@ -21,3 +21,16 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.button {
+    display: block;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 4px;
+    text-decoration: none; 
+    color: green;
+    font-size: 1.5em;
+    border: 3px solid green;
+    border-radius: 10px;
+    background-color: yellowgreen;
+}
