@@ -2,8 +2,10 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  width: 100%;
   overflow: hidden;
   background-color: rgb(18, 151, 35);
+  box-sizing: content-box; 
 } 
 
 ul.navbar li {

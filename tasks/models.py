@@ -15,7 +15,7 @@ class User(AbstractUser):
 
 class Task(models.Model):
     title = models.CharField(max_length=144)
-    description = models.CharField(max_length=200)
+    description = models.TextField(max_length=200)
     deadline = models.DateTimeField()
     task_type = models.CharField(max_length=66)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -1,13 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block meta %}
+
+<link rel="stylesheet" href="{% static 'tasks/task_list.css' %}">
+
+{% endblock %}
 
 {% block content %}
 
-<h1> Tasks </h1>
-<ul>
+<h1 id="task-list-heading"> Your Tasks </h1>
+<ul class="task-list">
 {% for task in tasks %}
-<li><a href="{% url 'tasks:task-detail' task.id %}"> {{ task }} </a></li>
+    <li class="task-block"><a href="{% url 'tasks:task-detail' task.id %}"> {{ task }} </a></li>
 {% endfor %}
 </ul>
-<a href="{% url 'tasks:task-create' %}"> Add New Task </a>
+
+<div class="center-horizontally">
+    <a class="task-add-button" href="{% url 'tasks:task-create' %}"><div class ="center">Add New Task</div></a>
+</div>
 
 {% endblock %}
