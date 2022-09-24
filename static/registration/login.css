@@ -25,3 +25,13 @@ form {
 .button {
     margin-top: 22px;
 }
+
+.signup-suggestion {
+    text-align: center;
+    width: 350px;
+}
+
+a {
+    text-decoration: none;
+    color: blue;
+}

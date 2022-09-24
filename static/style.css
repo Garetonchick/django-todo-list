@@ -34,3 +34,7 @@ body {
     border-radius: 10px;
     background-color: yellowgreen;
 }
+
+.block {
+    display: block;
+}

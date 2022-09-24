@@ -1,7 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block meta %}
+
+<link rel="stylesheet" href="{% static 'landing_page.css' %}">
+
+{% endblock %}
 
 {% block content %}
 
-<h1>Welcome to the bondage gay website</h1>
+<div class="center-horizontally">
+    <h1>Welcome to my website</h1>
+    <p class="text-box">
+        After you login you can create, edit and even delete tasks. 
+        Tasks can have title, description, deadline and type. 
+        Enjoy!
+    </p>
+</div>
 
 {% endblock %}

@@ -1,0 +1,11 @@
+.text-box {
+    margin-top: 10px;
+    display: block;
+    box-sizing: border-box;
+    width: 500px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: bisque;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}

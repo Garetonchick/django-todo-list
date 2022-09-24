@@ -1,12 +1,29 @@
-
 {% extends "base.html" %}
+{% load static %}
+
+{% block meta %}
+
+<link rel="stylesheet" href="{% static 'registration/signup.css' %}">
+
+{% endblock %}
 
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Signup</button>
-</form>
+<div class="center-horizontally">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="error">{{ field.errors }}</div>
+            <div class="form-item">
+                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                <div class="form-field">{{ field }}</div>
+            </div>
+        {% endfor %}
+
+        <button class="button" type="submit">Signup</button>
+    </form>
+    <p class="login-suggestion">Already have an account? You can log in <a href="{% url 'login' %}">here</a>.</p>
+</div>
 
 {% endblock %}
